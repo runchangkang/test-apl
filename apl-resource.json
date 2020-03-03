@@ -242,6 +242,55 @@
                 }
             ]
         },
+        "cleanRoomsCommand":{
+             "parameters": [
+                "roomlist"
+            ],
+             "command": [
+                {
+                    "type": "Parallel",
+                    "commands": [
+                        {
+                            "type": "SendEvent",
+                            "arguments": [
+                                "APL.ControlRobotPage",
+                                "rbt_ctrl:DRC:${roomlist}"
+                            ]
+                        },
+                        {
+                            "type": "AnimateLoading"
+                        }
+                    ]
+                }
+             ]
+        },
+        "cleanFrameCleanRooms":{
+            "command": [
+                {
+                    "type": "Sequential",
+                    "commands": [
+                        {
+                            "type": "cleanFrameMoveDown"
+                        },
+                        {
+                            "type": "Parallel",
+                            "commands": [
+                                {
+                                    "type": "SendEvent",
+                                    "arguments": [
+                                        "APL.cleanByRoomPage"
+                                    ]
+                                },
+                                {
+                                    "type": "AnimateLoading"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        
+        },
         "cleanFrameCleanAll":{
             "parameters": [
                 "command"
