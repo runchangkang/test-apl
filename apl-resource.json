@@ -1,6 +1,34 @@
 {
     "styles": {},
     "commands": {
+        "rotate":{
+           "parameters": [
+                "compId"
+            ],
+            "commands":[
+                {
+                    "type": "AnimateItem",
+                    "componentId": "${compId}",
+                    "duration": 2000,
+                    "repeatCount": 3,
+                    "value": [
+                        {
+                            "property": "transform",
+                            "from": [
+                                {
+                                    "rotate": 720
+                                }
+                            ],
+                            "to": [
+                                {
+                                    "rotate": 0
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
         "rotateInactive": {
             "parameters": [
                 "compId"
@@ -9,25 +37,8 @@
                 "type": "Parallel",
                 "commands": [
                     {
-                        "type": "AnimateItem",
-                        "componentId": "${compId}",
-                        "duration": 2000,
-                        "repeatCount": 3,
-                        "value": [
-                            {
-                                "property": "transform",
-                                "from": [
-                                    {
-                                        "rotate": 720
-                                    }
-                                ],
-                                "to": [
-                                    {
-                                        "rotate": 0
-                                    }
-                                ]
-                            }
-                        ]
+                        "type": "rotate",
+                        "compId": "${compId}"
                     },
                     {
                         "type": "SendEvent",
@@ -224,6 +235,39 @@
                             "to": [
                                 {
                                     "translateY": "0vh"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        "cleanFrameCleanAll":{
+            "parameters": [
+                "command"
+            ],
+            "command": [
+                {
+                    "type": "Sequential",
+                    "commands": [
+                        {
+                            "type": "cleanFrameMoveDown"
+                        },
+                        {
+                            "type": "Parallel",
+                            "commands": [
+                                {
+                                    "type": "SendEvent",
+                                    "arguments": [
+                                        "APL.ControlRobotPage",
+                                        "${command}"
+                                    ]
+                                },
+                                {
+                                               
+                                    "type": "rotate",
+                                    "compId": "inactive_button_outside"
+                                
                                 }
                             ]
                         }
