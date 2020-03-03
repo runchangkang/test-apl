@@ -278,7 +278,7 @@
                                 {
                                     "type": "SendEvent",
                                     "arguments": [
-                                        "APL.cleanByRoomPage"
+                                        "APL.CleanByRoomPage"
                                     ]
                                 },
                                 {
